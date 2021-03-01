@@ -1,0 +1,18 @@
+.main{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+}
+
+.game{
+    background-color: white;
+    width: 100vmin;
+    height: 80vmin;
+    display: grid;
+    grid-template-rows: repeat(14, 1fr);
+    grid-template-columns: repeat(14, 1fr);
+}
