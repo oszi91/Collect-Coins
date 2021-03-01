@@ -34,7 +34,8 @@ module.exports = (env) => {
                             "@babel/preset-env"
                           ],
                           plugins: [
-                              ["@babel/plugin-transform-runtime"]
+                              ["@babel/plugin-transform-runtime"],
+                              ["@babel/plugin-proposal-class-properties"]
                           ]
                       }
                   }

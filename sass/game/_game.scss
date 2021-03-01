@@ -1,18 +1,47 @@
-.main{
+.main {
     display: flex;
+    flex-direction: column;
     height: 100%;
     width: 100%;
-    display: flex;
     justify-content: center;
     align-items: center;
     background-color: black;
+    background: radial-gradient(ellipse at center, rgba(127, 0, 173, 0.6) 0%,
+            rgba(0, 0, 0, 0.8) 60%,
+            rgba(0, 0, 0, 1) 90%);
 }
 
-.game{
+.game {
     background-color: white;
     width: 100vmin;
     height: 80vmin;
     display: grid;
-    grid-template-rows: repeat(14, 1fr);
-    grid-template-columns: repeat(14, 1fr);
+    grid-template-rows: repeat(11, 1fr);
+    grid-template-columns: repeat(11, 1fr);
+}
+
+$font-size: 50px;
+
+.score {
+    font-size: $font-size;
+    background: linear-gradient(to bottom, #4ca4a8 0%, #edf0f1 50%, #16434f 51%, #46aaed 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+
+}
+
+.character {
+    background-image: url('./../images/character.jpg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.coin {
+    background-image: url('./../images/coin.gif');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
 }
