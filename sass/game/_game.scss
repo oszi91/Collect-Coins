@@ -6,9 +6,8 @@
     justify-content: center;
     align-items: center;
     background-color: black;
-    background: radial-gradient(ellipse at center, rgba(127, 0, 173, 0.6) 0%,
-            rgba(0, 0, 0, 0.8) 60%,
-            rgba(0, 0, 0, 1) 90%);
+    background-color: #15428a;
+    background: linear-gradient(#15428a, #75064e);
 }
 
 .game {
@@ -16,20 +15,88 @@
     width: 100vmin;
     height: 80vmin;
     display: grid;
-    grid-template-rows: repeat(11, 1fr);
-    grid-template-columns: repeat(11, 1fr);
 }
 
-$font-size: 50px;
+.game-over{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    top:0;
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    background: rgba($color: #531111, $alpha: 0.95);
+    text-transform: uppercase;
+
+    &__text{
+        font-size: 100px;
+        text-align: center;
+        background: linear-gradient(to bottom, #4ca4a8 0%, #edf0f1 50%, #16434f 51%, #46aaed 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 25px;
+    }
+
+    &__restart{
+    background: #7C7C7C;
+	border-bottom: 6px inset rgba(0,0,0,.5);
+	border-left: 6px inset rgba(0,0,0,.5);
+	border-right: 6px inset rgba(255,255,255,.5);
+	border-top: 6px inset rgba(255,255,255,.5);
+	font-size: 2.2rem;
+	margin: 1rem;
+	min-width: 200px;
+	padding: .5rem;
+    color: rgb(42, 42, 138);
+	text-transform: uppercase;
+
+	&:focus,
+	&:hover {
+		background: #BCBCBC;
+	}
+    }
+
+    &--visible{
+        display: flex;
+    }
+}
+
+
+
+$font-size: 30px;
+
+.scores__container{
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+    width: 100vmin;
+    letter-spacing: .05em;
+    text-shadow: 4px 4px 15px #d5d5d5, 7px 7px 0px rgba(0, 0, 0, 0.05);
+    color: white;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+
+    @include phone{
+        text-shadow: 4px 4px 15px #d5d5d5, 4px 3px 0px rgba(0, 0, 0, 0.05);
+    }
+}
 
 .score {
-    font-size: $font-size;
-    background: linear-gradient(to bottom, #4ca4a8 0%, #edf0f1 50%, #16434f 51%, #46aaed 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-transform: uppercase;
-    margin-bottom: 10px;
+   font-size: 50px;
+   @include phone{
+       font-size: 30px;
+   }
+}
 
+.speed, .coins{
+    font-size: 40px;
+    @include phone{
+        font-size: 15px;
+    }
+    &__number{
+        text-transform: initial;
+    }
 }
 
 .character {
@@ -44,4 +111,30 @@ $font-size: 50px;
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
+}
+
+.keyboard{
+    display: none;
+    width: 200px;
+    flex-wrap: wrap;
+    font-size: 2rem;
+    margin-top: 50px;
+    &__up{
+        width: 100%;
+        margin: 0 calc(100%/3);
+    }
+
+    &__down,&__left,&__right{
+        width: calc(100%/3);
+    }
+
+    @include phone{
+        display: flex;
+    }
+
+    @include largerdevices{
+        display: flex;
+        width: 400px;
+    }
+   
 }

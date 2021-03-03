@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    
   
     @media (max-width: 1024px){
       -webkit-touch-callout: none;
@@ -12,6 +13,10 @@
       user-select: none;
       -webkit-tap-highlight-color: transparent;
     }
+  }
+
+  .fas{
+    pointer-events: none;
   }
   
   input::-webkit-outer-spin-button,
