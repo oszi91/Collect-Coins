@@ -100,22 +100,14 @@ $font-size: 30px;
 }
 
 .character {
-<<<<<<< HEAD
     background-image: url('/images/character.jpg');
-=======
-    background-image: url('../images/character.jpg');
->>>>>>> 70d92ca3fd3db7ad6e36e5408027c68bb59f0d53
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
 }
 
 .coin {
-<<<<<<< HEAD
     background-image: url('/images/coin.gif');
-=======
-    background-image: url('../images/coin.gif');
->>>>>>> 70d92ca3fd3db7ad6e36e5408027c68bb59f0d53
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
@@ -123,9 +115,9 @@ $font-size: 30px;
 
 .keyboard{
     display: none;
-    width: 200px;
+    width: 250px;
     flex-wrap: wrap;
-    font-size: 2rem;
+    font-size: 2.5rem;
     margin-top: 50px;
     &__up{
         width: 100%;

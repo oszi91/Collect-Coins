@@ -232,8 +232,11 @@ class Game {
             } else if (speedGame > (this.gameSpeedDiffToHtml+2) && speedGame <= (this.gameSpeedDiffToHtml+3)) {
                 coinsBonus = this.coinsBonusNumber[2];
                 this.counter += coinsBonus;
-            } else if (speedGame >= this.gameSpeedDiffToHtml+4) {
+            } else if (speedGame > (this.gameSpeedDiffToHtml+3) && speedGame <= (this.gameSpeedDiffToHtml+4)) {
                 coinsBonus = this.coinsBonusNumber[3];
+                this.counter += coinsBonus;
+            } else if (speedGame > this.gameSpeedDiffToHtml+4) {
+                coinsBonus = this.coinsBonusNumber[4];
                 this.counter += coinsBonus;
             } else {
                 coinsBonus = this.coinsBonusNumber[0];
