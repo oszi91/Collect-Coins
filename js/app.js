@@ -35,7 +35,7 @@ class Game {
 
     beforeTime = performance.now();
 
-    gameSpeed = 5;
+    gameSpeed = 6;
     gameSpeedDiffToHtml = this.gameSpeed;
     gameSpeedUpgrade = 0.1;
 
@@ -94,7 +94,7 @@ class Game {
     update() {
         this.gameStatus = this.gameOver();
 
-        if (this.counter === this.wonScore) {
+        if (this.counter >= this.wonScore) {
             this.stopGame = true;
             document.querySelector('.game-over__text').innerHTML = `Wow, 100 coins! <br/> You Won!`;
             this.gameOverBoard.classList.add('game-over--visible');
