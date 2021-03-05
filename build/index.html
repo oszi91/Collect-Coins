@@ -10,6 +10,19 @@
 <link href="./css/style.css" rel="stylesheet"></head>
 
 <body>
+    <div class="start-game">
+        <h1 class="start-game__text">Collect 100 coins to win</h1>
+        <h2 class="start-game__text-level">Choice your level:</h2>
+        <div class="level">
+            <button class="level-btn" data-level="easy">Easy</button>
+            <button class="level-btn" data-level="medium" autofocus>Medium</button>
+            <button class="level-btn" data-level="hard">Hard</button>
+            <button class="level-btn" data-level="extreme">Extreme</button>
+        </div>
+        <h3 class="start-game__text-and">AND</h3>
+        <button class="start-game__btn">Play!</button>
+        <div class="start-game__music"><i class="fas fa-volume-mute"></i></div>
+    </div>
     <main class="main">
         <div class="scores__container">
             <h2 class="speed">Speed <span class="speed__number">x1.0</span></h2>
@@ -18,6 +31,7 @@
         </div>
         <div class="game"></div>
         <div class="game-over">
+            <p class="win-game"></p>
             <p class="game-over__text">Game Over!</p>
             <button class="game-over__restart">Try again</button>
         </div>
@@ -28,6 +42,9 @@
             <button class="keyboard__right"><i class="fas fa-arrow-right"></i></button>
         </div>
     </main>
+    <audio class="background-music" controls>
+        <source src="sounds/retrowave.mp3" type="audio/mp3">
+    </audio>
 <script type="text/javascript" src="js/out.js"></script></body>
 
 </html>

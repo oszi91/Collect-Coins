@@ -1,81 +1,44 @@
 import '../sass/main.scss';
+import CharacterControl from './CharacterControl';
+import Config from './Config';
+import VariablesFromHTML from './VariablesFromHTML';
+import Character from './Character';
+import Coin from './Coin';
+import GameBoard from './GameBoard';
 
 class Game {
-
-    game = document.querySelector('.game');
-    score = document.querySelector('.score__number');
-    speed = document.querySelector('.speed__number');
-    coins = document.querySelector('.coins__number');
-    gameOverBoard = document.querySelector('.game-over');
-    gameOverBtn = document.querySelector('.game-over__restart');
+    characterControl = new CharacterControl();
+    character = new Character();
+    coin = new Coin();
+    
     gameStatus = false;
     stopGame = false;
+    musicOn = false;
 
-    gridSize = 6;
-    counter = 0;
-    wonScore = 100;
-    coinsBonusNumber = [1,2,3,4,5];
-
-    charPosition = {
-        x: this.gridCenterPosition(),
-        y: this.gridCenterPosition()
-    };
+    scoreCounter = 0;
+    gameSpeedDiffToHtml = Config.GAME_SPEED;
 
     coinPosition = this.randomCoinPositionGrid();
 
-    charDirection = {
-        x: 0,
-        y: 0
-    };
-
-    charLastDirection = {
-        x: 0,
-        y: 0
-    }
-
     beforeTime = performance.now();
-
-    gameSpeed = 6;
-    gameSpeedDiffToHtml = this.gameSpeed;
-    gameSpeedUpgrade = 0.1;
-
     gameMusic;
 
-    init() {
-        this.gameMusic = new Audio();
-        this.gameMusic.src = './../sounds/retrowave.mp3';
-        this.gameMusic.play();
-        this.setGameboardSize();
-        this.play();
-        this.controls();
-    };
-
-    setGameboardSize() {
-        this.game.style.gridTemplateRows = `repeat(${this.gridSize+1}, 1fr)`;
-        this.game.style.gridTemplateColumns = `repeat(${this.gridSize+1}, 1fr)`;
+    sound(sound,src){
+        sound = new Audio();
+        sound.src = src;
+        sound.play();
     }
-
-    randomCoinPosition() {
-        return {
-            x: Math.floor(Math.random() * this.gridSize) + 1,
-            y: Math.floor(Math.random() * this.gridSize) + 1
-        }
-    };
 
     randomCoinPositionGrid() {
         let coinPosition;
         while (!coinPosition || this.isOnTheSamePosition(coinPosition)) {
-            coinPosition = this.randomCoinPosition();
+            coinPosition = this.coin.randomCoinPosition();
         };
         return coinPosition;
     }
 
-    gridCenterPosition() {
-        return Math.ceil(this.gridSize / 2);
-    };
-
     gameSpeedUpdate() {
-        let actualSpeedGame = this.gameSpeed += this.gameSpeedUpgrade;
+        let actualSpeedGame = Config.GAME_SPEED += Config.GAME_SPEED_UPGRADE;
         return actualSpeedGame;
     };
 
@@ -85,7 +48,7 @@ class Game {
         const secSinceRender = (currTime - this.beforeTime) / 1000;
         requestAnimationFrame((currTime) => this.play(currTime));
 
-        if (secSinceRender < 1 / this.gameSpeed) return;
+        if (secSinceRender < 1 / Config.GAME_SPEED) return;
 
         this.beforeTime = currTime;
         this.update();
@@ -94,122 +57,38 @@ class Game {
     update() {
         this.gameStatus = this.gameOver();
 
-        if (this.counter >= this.wonScore) {
+        if (this.scoreCounter >= Config.SCORE_TO_WIN) {
             this.stopGame = true;
-            document.querySelector('.game-over__text').innerHTML = `Wow, 100 coins! <br/> You Won!`;
-            this.gameOverBoard.classList.add('game-over--visible');
-            this.gameOverBtn.addEventListener('click', () => location.reload());
+            VariablesFromHTML.gameOverText.innerHTML = '';
+            VariablesFromHTML.winText.innerHTML = `Wow, ${this.scoreCounter} coins! <br/> You Won!`;
+            VariablesFromHTML.gameOverBoard.classList.add('game-over--visible');
+            VariablesFromHTML.gameOverBtn.addEventListener('click', () => location.reload());
         } else if (this.gameStatus) {
             this.stopGame = true;
-            this.gameMusic.pause();
-            const gameOver = new Audio();
-            gameOver.src = './../sounds/game-over.wav';
-            gameOver.play();
-            this.gameOverBoard.classList.add('game-over--visible');
-            this.gameOverBtn.addEventListener('click', () => location.reload());
+
+            if(this.musicOn){
+                VariablesFromHTML.backgroundMusic.pause();
+                this.sound(this.gameMusic, './../sounds/game-over.wav')
+            }
+            VariablesFromHTML.gameOverBoard.classList.add('game-over--visible');
+            VariablesFromHTML.gameOverBtn.addEventListener('click', () => location.reload());
             return;
         } else {
             this.updateCharacter();
             this.updateCoin();
-            this.drawCharacter();
-            this.drawCoin();
+            this.character.drawCharacter();
+            this.coin.drawCoin(this.coinPosition);
         }
-    };
-
-    keyUp = document.querySelector('.keyboard__up');
-    keyDown = document.querySelector('.keyboard__down');
-    keyLeft = document.querySelector('.keyboard__left');
-    keyRight = document.querySelector('.keyboard__right');
-
-    controls() {
-  
-        const keydown = ['keydown', 'ArrowUp','ArrowDown', 'ArrowLeft', 'ArrowRight', 'e.key'];
-        const onClick = ['click', this.keyUp, this.keyDown, this.keyLeft, this.keyRight, 'e.target'];
-
-        const controlUpd = (kind, up, down, left, right, ekind) => {
-            window.addEventListener(kind, e => {
-                let eswitch;
-                if(ekind === 'e.key'){
-                    eswitch = e.key;
-                } else if (ekind === 'e.target'){
-                    eswitch = e.target;
-                }
-
-                switch (eswitch) {
-                    case up: {
-                        if (this.charLastDirection.y !== 0) break;
-                        this.charDirection = {
-                            x: 0,
-                            y: -1
-                        };
-                        break;
-                    }
-                    case down: {
-                        if (this.charLastDirection.y !== 0) break;
-                        this.charDirection = {
-                            x: 0,
-                            y: 1
-                        };
-                        break;
-                    }
-                    case left: {
-                        if (this.charLastDirection.x !== 0) break;
-                        this.charDirection = {
-                            x: -1,
-                            y: 0
-                        };
-                        break;
-                    }
-                    case right: {
-                        if (this.charLastDirection.x !== 0) break;
-                        this.charDirection = {
-                            x: 1,
-                            y: 0
-                        };
-                    }
-                    break;
-                }
-            })
-        }
-        controlUpd(onClick[0],onClick[1],onClick[2],onClick[3],onClick[4], onClick[5]);
-        controlUpd(keydown[0],keydown[1],keydown[2],keydown[3],keydown[4], keydown[5]);
-    };
-
-    controlDirectionUpdate() {
-        this.charLastDirection = this.charDirection;
-        return this.charLastDirection;
-    };
-
-    drawCharacter() {
-        this.game.innerHTML = '';
-
-        const charEl = document.createElement('div');
-        charEl.style.gridColumnStart = this.charPosition.x;
-        charEl.style.gridRowStart = this.charPosition.y;
-        charEl.classList.add('character');
-        this.game.appendChild(charEl);
-    };
-
-    updateCharacter() {
-        this.controlDirectionUpdate();
-        this.charPosition.x += this.charDirection.x
-        this.charPosition.y += this.charDirection.y
-    };
-
-    gameOver() {
-        return (this.charPosition.x < 1 || this.charPosition.y < 1 || this.charPosition.x > this.gridSize || this.charPosition.y > this.gridSize)
-    };
-
-    drawCoin() {
-        const coinEl = document.createElement('div');
-        coinEl.style.gridColumnStart = this.coinPosition.x;
-        coinEl.style.gridRowStart = this.coinPosition.y;
-        coinEl.classList.add('coin');
-        this.game.appendChild(coinEl);
     };
 
     isOnTheSamePosition(coinPos) {
-        return coinPos.x === this.charPosition.x && coinPos.y === this.charPosition.y
+        return coinPos.x === this.character.charPosition.x && coinPos.y === this.character.charPosition.y
+    };
+
+    updateCharacter() {
+        this.characterControl.controlDirectionUpdate();
+        this.character.charPosition.x += this.characterControl.charDirection.x
+        this.character.charPosition.y += this.characterControl.charDirection.y
     };
 
     updateCoin() {
@@ -217,39 +96,116 @@ class Game {
         let coinsBonus;
 
         if (checkPosition) {
-            const coinSound = new Audio();
-            coinSound.src = './../sounds/coin-collect.wav';
-            coinSound.play();
+            if(this.musicOn){
+                this.sound(this.gameMusic, './../sounds/coin-collect.wav')
+            }
             this.gameSpeedUpdate();
             this.coinPosition = this.randomCoinPositionGrid();
 
-            let speedGame = this.gameSpeed.toFixed(1);
+            let speedGame = Config.GAME_SPEED.toFixed(1);
             let gameSpeedHtml = (speedGame - this.gameSpeedDiffToHtml + 1).toFixed(1);
-
-            if (speedGame > this.gameSpeedDiffToHtml+1 && speedGame <= (this.gameSpeedDiffToHtml+2)) {
-                coinsBonus = this.coinsBonusNumber[1];
-                this.counter += coinsBonus;
-            } else if (speedGame > (this.gameSpeedDiffToHtml+2) && speedGame <= (this.gameSpeedDiffToHtml+3)) {
-                coinsBonus = this.coinsBonusNumber[2];
-                this.counter += coinsBonus;
-            } else if (speedGame > (this.gameSpeedDiffToHtml+3) && speedGame <= (this.gameSpeedDiffToHtml+4)) {
-                coinsBonus = this.coinsBonusNumber[3];
-                this.counter += coinsBonus;
-            } else if (speedGame > this.gameSpeedDiffToHtml+4) {
-                coinsBonus = this.coinsBonusNumber[4];
-                this.counter += coinsBonus;
+         
+            console.log(this.gameSpeedDiffToHtml);
+            if (speedGame > this.gameSpeedDiffToHtml + 1 && speedGame <= (this.gameSpeedDiffToHtml + 2)) {
+                coinsBonus = Config.ADD_COINS_BONUS[1];
+                this.scoreCounter += coinsBonus;
+            } else if (speedGame > (this.gameSpeedDiffToHtml + 2) && speedGame <= (this.gameSpeedDiffToHtml + 3)) {
+                coinsBonus = Config.ADD_COINS_BONUS[2];
+                this.scoreCounter += coinsBonus;
+            } else if (speedGame > (this.gameSpeedDiffToHtml + 3) && speedGame <= (this.gameSpeedDiffToHtml + 4)) {
+                coinsBonus = Config.ADD_COINS_BONUS[3];
+                this.scoreCounter += coinsBonus;
+            } else if (speedGame > this.gameSpeedDiffToHtml + 4) {
+                coinsBonus = Config.ADD_COINS_BONUS[4];
+                this.scoreCounter += coinsBonus;
             } else {
-                coinsBonus = this.coinsBonusNumber[0];
-                this.counter++;
+                coinsBonus = Config.ADD_COINS_BONUS[0];
+                this.scoreCounter++;
             };
-
-            this.speed.textContent = `x${gameSpeedHtml}`;
-            this.coins.textContent = `x${coinsBonus}`;
+            console.log(speedGame)
+            VariablesFromHTML.speed.textContent = `x${gameSpeedHtml}`;
+            VariablesFromHTML.coins.textContent = `x${coinsBonus}`;
         };
-        this.score.textContent = this.counter;
+        
+        VariablesFromHTML.score.textContent = this.scoreCounter;
     };
 
+    gameOver() {
+        return (this.character.charPosition.x < 1 || this.character.charPosition.y < 1 || this.character.charPosition.x > Config.GRID_SIZE || this.character.charPosition.y > Config.GRID_SIZE)
+    };
+
+    init() {
+        if(this.musicOn){
+            VariablesFromHTML.backgroundMusic.play();
+        }
+        GameBoard.setGameboardSize();
+        this.play();
+        this.characterControl.controls();
+    };
 };
 
 const game = new Game();
-game.init();
+
+const startGame = document.querySelector('.start-game');
+const playBtn = document.querySelector('.start-game__btn');
+const musicIcon = document.querySelector('.start-game__music');
+
+function playGame(){
+    startGame.classList.add('start-game-hide');
+    game.init();
+};
+
+function isMusicOn(){
+    const icon = musicIcon.querySelector('.fas');
+
+    if(game.musicOn){
+        game.musicOn = false;
+        icon.className='fas fa-volume-mute'
+    } else{
+        game.musicOn = true;
+        icon.className='fas fa-volume-up'
+    }
+};
+
+const levelBtns = document.querySelectorAll('.level');
+
+levelBtns.forEach(btn => {
+    btn.addEventListener('click', e => {
+        switch(e.target.dataset.level){
+            case 'easy': {
+                Config.GRID_SIZE = 8;
+                Config.GAME_SPEED = 3;
+                Config.GAME_SPEED_UPGRADE = 0.05;
+                Config.ADD_COINS_BONUS = [1,2,4,6,8]
+                game.gameSpeedDiffToHtml = Config.GAME_SPEED;
+                game.init();
+                break;
+            };
+            case 'medium': {
+                game.init();
+                break;
+            };
+            case 'hard': {
+                Config.GRID_SIZE = 6;
+                Config.GAME_SPEED = 6;
+                Config.GAME_SPEED_UPGRADE = 0.15;
+                Config.ADD_COINS_BONUS = [1,1,2,3,5]
+                game.gameSpeedDiffToHtml = Config.GAME_SPEED;
+                game.init();
+                break;
+            };
+            case 'extreme': {
+                Config.GRID_SIZE = 5;
+                Config.GAME_SPEED = 7;
+                Config.GAME_SPEED_UPGRADE = 0.2;
+                Config.ADD_COINS_BONUS = [1,1,1,2,5]
+                game.gameSpeedDiffToHtml = Config.GAME_SPEED;
+                game.init();
+                break;
+            };
+        };
+    })
+});
+
+musicIcon.addEventListener('click', isMusicOn);
+playBtn.addEventListener('click', playGame);

@@ -1,3 +1,82 @@
+.start-game{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    top:0;
+    height: 100vh;
+    width: 100%;
+    background: linear-gradient(#15428a, #75064e);
+
+    &__text, &__text-level, &__text-and{
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 5rem;
+        margin-bottom: 50px;
+        text-shadow: 4px 4px 15px #d5d5d5, 7px 7px 0px rgba(0, 0, 0, 0.05);
+        color: white;
+        @include phone{
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+    }
+
+    &__text-level{
+        font-size: 3rem;
+        @include phone{
+            margin-top: 20px;
+            font-size: 1.8rem;
+        }
+    }
+
+    &__text-and{
+        margin-bottom: 20px;
+        font-size:2.5rem;
+    }
+
+    &-hide{
+        display: none;
+    }
+
+    &__btn{
+        margin: 10px;
+        width: 300px;
+        font-size: 4rem;
+        @include phone{
+            width: 70%;
+            font-size: 1rem;
+        }
+    }
+
+    &__music{
+        cursor: pointer;
+        color: white;
+        font-size: 3rem;
+        margin: 10px 0;
+    }
+
+   .level{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 15px;
+    width: 100%;
+
+    &-btn{
+        width: 200px;
+        font-size: 30px;
+        margin: 30px 10px;
+
+        @include phone{
+            width: 22%;
+            font-size: 0.6rem;
+        }
+    }
+   }
+
+}
+
 .main {
     display: flex;
     flex-direction: column;
@@ -29,40 +108,32 @@
     background: rgba($color: #531111, $alpha: 0.95);
     text-transform: uppercase;
 
-    &__text{
+    &__text, .win-game{
+        text-align: center;
         font-size: 100px;
         text-align: center;
-        background: linear-gradient(to bottom, #4ca4a8 0%, #edf0f1 50%, #16434f 51%, #46aaed 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin-bottom: 25px;
+        color: white;
+        text-shadow: 4px 4px 15px #d5d5d5, 7px 7px 0px rgba(0, 0, 0, 0.05);
+        margin-bottom: 35px;
+    }
+
+    .win-game{
+        @include phone{
+            font-size: 60px;
+            line-height: 1.2;
+        }
     }
 
     &__restart{
-    background: #7C7C7C;
-	border-bottom: 6px inset rgba(0,0,0,.5);
-	border-left: 6px inset rgba(0,0,0,.5);
-	border-right: 6px inset rgba(255,255,255,.5);
-	border-top: 6px inset rgba(255,255,255,.5);
-	font-size: 2.2rem;
-	margin: 1rem;
-	min-width: 200px;
-	padding: .5rem;
-    color: rgb(42, 42, 138);
-	text-transform: uppercase;
-
-	&:focus,
-	&:hover {
-		background: #BCBCBC;
-	}
+        color: rgb(42, 42, 138);
+        min-width: 200px;
+        font-size: 2.2rem;
     }
 
     &--visible{
         display: flex;
     }
 }
-
-
 
 $font-size: 30px;
 
@@ -119,6 +190,7 @@ $font-size: 30px;
     flex-wrap: wrap;
     font-size: 2.5rem;
     margin-top: 50px;
+    border-radius: 0;
     &__up{
         width: 100%;
         margin: 0 calc(100%/3);
@@ -136,5 +208,8 @@ $font-size: 30px;
         display: flex;
         width: 400px;
     }
-   
+}
+
+audio{
+    display: none;
 }
