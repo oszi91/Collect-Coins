@@ -12,3 +12,10 @@ $largerdevices-max-width: 1200px;
     @content;
   }
 }
+
+@mixin flexBase {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @content;
+}

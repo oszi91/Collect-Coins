@@ -19,7 +19,7 @@ module.exports = (env) => {
               template: './index.html'
           }),
           new MiniCSS({
-              filename: "./css/style.css",
+              filename: "./style.css",
           })
       ],
       module: {
@@ -54,7 +54,9 @@ module.exports = (env) => {
                           options: {
                               plugins: () => [
                                   require('autoprefixer')
-                              ]
+                              ],
+                              publicPath: '../',
+                            useRelativePaths: true
                           }
                       },
                       'sass-loader']
@@ -70,6 +72,17 @@ module.exports = (env) => {
                       }
                   }
               },
+              {
+                test: /\.(mp3|wav)$/,
+                use: {
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name].[ext]',
+                        publicPath: 'sounds',
+                        outputPath: 'sounds'
+                    }
+                }
+            },
               {
                   test: /\.(eot|ttf|woff|woff2)$/,
                   use: {

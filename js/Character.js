@@ -1,6 +1,5 @@
 import Config from './Config';
 import VariablesFromHTML from './VariablesFromHTML';
-import CharacterControl from './CharacterControl';
 
 class Character{
     gridCenterPosition() {
@@ -21,8 +20,6 @@ class Character{
         charEl.classList.add('character');
         VariablesFromHTML.game.appendChild(charEl);
     };
-
-  
-}
+};
 
 export default Character;

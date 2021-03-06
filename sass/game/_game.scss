@@ -1,21 +1,19 @@
 .start-game{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flexBase;
     flex-direction: column;
     position: absolute;
     top:0;
     height: 100vh;
     width: 100%;
-    background: linear-gradient(#15428a, #75064e);
+    background: $background-color;
 
     &__text, &__text-level, &__text-and{
         text-align: center;
         text-transform: uppercase;
         font-size: 5rem;
         margin-bottom: 50px;
-        text-shadow: 4px 4px 15px #d5d5d5, 7px 7px 0px rgba(0, 0, 0, 0.05);
-        color: white;
+        text-shadow: $text-shadow;
+        color: $font-color;
         @include phone{
             font-size: 3rem;
             margin-bottom: 20px;
@@ -51,7 +49,7 @@
 
     &__music{
         cursor: pointer;
-        color: white;
+        color: $font-color;
         font-size: 3rem;
         margin: 10px 0;
     }
@@ -65,7 +63,7 @@
 
     &-btn{
         width: 200px;
-        font-size: 30px;
+        font-size: 2.3rem;
         margin: 30px 10px;
 
         @include phone{
@@ -74,58 +72,51 @@
         }
     }
    }
-
 }
 
 .main {
-    display: flex;
+    @include flexBase;
     flex-direction: column;
     height: 100%;
     width: 100%;
-    justify-content: center;
-    align-items: center;
-    background-color: black;
-    background-color: #15428a;
-    background: linear-gradient(#15428a, #75064e);
+    background: $background-color;
 }
 
 .game {
-    background-color: white;
+    background-color: $font-color;
     width: 100vmin;
     height: 80vmin;
     display: grid;
 }
 
 .game-over{
+    @include flexBase;
     display: none;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
     top:0;
     position: fixed;
     height: 100vh;
     width: 100%;
-    background: rgba($color: #531111, $alpha: 0.95);
+    background: $background-game-over;
     text-transform: uppercase;
 
     &__text, .win-game{
         text-align: center;
         font-size: 100px;
         text-align: center;
-        color: white;
-        text-shadow: 4px 4px 15px #d5d5d5, 7px 7px 0px rgba(0, 0, 0, 0.05);
+        color: $font-color;
+        text-shadow: $text-shadow;
         margin-bottom: 35px;
     }
 
     .win-game{
         @include phone{
-            font-size: 60px;
+            font-size: 4rem;
             line-height: 1.2;
         }
     }
 
     &__restart{
-        color: rgb(42, 42, 138);
         min-width: 200px;
         font-size: 2.2rem;
     }
@@ -135,59 +126,57 @@
     }
 }
 
-$font-size: 30px;
-
 .scores__container{
     display: flex;
     justify-content:space-around;
     align-items: center;
     width: 100vmin;
     letter-spacing: .05em;
-    text-shadow: 4px 4px 15px #d5d5d5, 7px 7px 0px rgba(0, 0, 0, 0.05);
-    color: white;
+    text-shadow: $text-shadow;
+    color: $font-color;
     text-transform: uppercase;
     margin-bottom: 15px;
 
     @include phone{
-        text-shadow: 4px 4px 15px #d5d5d5, 4px 3px 0px rgba(0, 0, 0, 0.05);
+        text-shadow: $text-shadow-mobile;
     }
 }
 
 .score {
-   font-size: 50px;
+   font-size: 3.1rem;
    @include phone{
-       font-size: 30px;
+       font-size: 2.2rem;
    }
 }
 
 .speed, .coins{
-    font-size: 40px;
+    font-size: 2.5rem;
     @include phone{
-        font-size: 15px;
+        font-size: 1rem;
     }
     &__number{
         text-transform: initial;
     }
 }
 
-.character {
-    background-image: url('/images/character.jpg');
+.character, .coin{
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
 }
 
+.character {
+    background-image: url('../images/character.jpg');
+}
+
 .coin {
-    background-image: url('/images/coin.gif');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
+    background-image: url('../images/coin.gif');
 }
 
 .keyboard{
     display: none;
-    width: 250px;
     flex-wrap: wrap;
+    width: 250px;
     font-size: 2.5rem;
     margin-top: 50px;
     border-radius: 0;
@@ -202,6 +191,8 @@ $font-size: 30px;
 
     @include phone{
         display: flex;
+        width: 220px;
+        font-size: 2.1rem;
     }
 
     @include largerdevices{

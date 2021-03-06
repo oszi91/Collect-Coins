@@ -1,12 +1,11 @@
 import VariablesFromHTML from './VariablesFromHTML';
-import Config from './Config';
 
 class Coin{
-    randomCoinPosition() {
+    randomCoinPosition(gridSize) {
         return {
-            x: Math.floor(Math.random() * Config.GRID_SIZE) + 1,
-            y: Math.floor(Math.random() * Config.GRID_SIZE) + 1
-        }
+            x: Math.floor(Math.random() * gridSize) + 1,
+            y: Math.floor(Math.random() * gridSize) + 1
+        };
     };
 
     drawCoin(coinPosition) {
@@ -16,6 +15,6 @@ class Coin{
         coinEl.classList.add('coin');
         VariablesFromHTML.game.appendChild(coinEl);
     };
-}
+};
 
 export default Coin;
