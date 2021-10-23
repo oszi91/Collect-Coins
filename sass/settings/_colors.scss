@@ -1,8 +1,11 @@
 $background-color: linear-gradient(#15428a, #75064e);
-$background-game-over: rgba($color: #531111, $alpha: 0.95);
+$background-game-over: rgba(
+	$color: #531111,
+	$alpha: 0.95,
+);
 
-$btn-color: #7C7C7C;
-$btn-hover: #BCBCBC;
+$btn-color: #7c7c7c;
+$btn-hover: #bcbcbc;
 $text-btn-color: rgb(42, 42, 138);
 
 $font-color: white;

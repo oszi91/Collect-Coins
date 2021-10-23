@@ -1,206 +1,213 @@
-.start-game{
-    @include flexBase;
-    flex-direction: column;
-    position: absolute;
-    top:0;
-    height: 100vh;
-    width: 100%;
-    background: $background-color;
+.start-game {
+	@include flexBase;
+	flex-direction: column;
+	position: absolute;
+	top: 0;
+	height: 100vh;
+	width: 100%;
+	background: $background-color;
 
-    &__text, &__text-level, &__text-and{
-        text-align: center;
-        text-transform: uppercase;
-        font-size: 5rem;
-        margin-bottom: 50px;
-        text-shadow: $text-shadow;
-        color: $font-color;
-        @include phone{
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-    }
+	&__text,
+	&__text-level,
+	&__text-and {
+		text-align: center;
+		text-transform: uppercase;
+		font-size: 5rem;
+		margin-bottom: 50px;
+		text-shadow: $text-shadow;
+		color: $font-color;
+		@include phone {
+			font-size: 3rem;
+			margin-bottom: 20px;
+		}
+	}
 
-    &__text-level{
-        font-size: 3rem;
-        @include phone{
-            margin-top: 20px;
-            font-size: 1.8rem;
-        }
-    }
+	&__text-level {
+		font-size: 3rem;
+		@include phone {
+			margin-top: 20px;
+			font-size: 1.8rem;
+		}
+	}
 
-    &__text-and{
-        margin-bottom: 20px;
-        font-size:2.5rem;
-    }
+	&__text-and {
+		margin-bottom: 20px;
+		font-size: 2.5rem;
+	}
 
-    &-hide{
-        display: none;
-    }
+	&-hide {
+		display: none;
+	}
 
-    &__btn{
-        margin: 10px;
-        width: 300px;
-        font-size: 4rem;
-        @include phone{
-            width: 70%;
-            font-size: 1rem;
-        }
-    }
+	&__btn {
+		margin: 10px;
+		width: 300px;
+		font-size: 4rem;
+		@include phone {
+			width: 70%;
+			font-size: 1rem;
+		}
+	}
 
-    &__music{
-        cursor: pointer;
-        color: $font-color;
-        font-size: 3rem;
-        margin: 10px 0;
-    }
+	&__music {
+		cursor: pointer;
+		color: $font-color;
+		font-size: 3rem;
+		margin: 10px 0;
+	}
 
-   .level{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 15px;
-    width: 100%;
+	.level {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin: 0 15px;
+		width: 100%;
 
-    &-btn{
-        width: 200px;
-        font-size: 2.3rem;
-        margin: 30px 10px;
+		&-btn {
+			width: 200px;
+			font-size: 2.3rem;
+			margin: 30px 10px;
 
-        @include phone{
-            width: 22%;
-            font-size: 0.6rem;
-        }
-    }
-   }
+			@include phone {
+				width: 22%;
+				font-size: 0.6rem;
+			}
+		}
+	}
 }
 
 .main {
-    @include flexBase;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-    background: $background-color;
+	@include flexBase;
+	flex-direction: column;
+	height: 100%;
+	width: 100%;
+	background: $background-color;
 }
 
 .game {
-    background-color: $font-color;
-    width: 100vmin;
-    height: 80vmin;
-    display: grid;
+	background-color: $font-color;
+	width: 100vmin;
+	height: 80vmin;
+	display: grid;
 }
 
-.game-over{
-    @include flexBase;
-    display: none;
-    flex-direction: column;
-    top:0;
-    position: fixed;
-    height: 100vh;
-    width: 100%;
-    background: $background-game-over;
-    text-transform: uppercase;
+.game-over {
+	@include flexBase;
+	display: none;
+	flex-direction: column;
+	top: 0;
+	position: fixed;
+	height: 100vh;
+	width: 100%;
+	background: $background-game-over;
+	text-transform: uppercase;
 
-    &__text, .win-game{
-        text-align: center;
-        font-size: 100px;
-        text-align: center;
-        color: $font-color;
-        text-shadow: $text-shadow;
-        margin-bottom: 35px;
-    }
+	&__text,
+	.win-game {
+		text-align: center;
+		font-size: 100px;
+		text-align: center;
+		color: $font-color;
+		text-shadow: $text-shadow;
+		margin-bottom: 35px;
+	}
 
-    .win-game{
-        @include phone{
-            font-size: 4rem;
-            line-height: 1.2;
-        }
-    }
+	.win-game {
+		@include phone {
+			font-size: 4rem;
+			line-height: 1.2;
+		}
+	}
 
-    &__restart{
-        min-width: 200px;
-        font-size: 2.2rem;
-    }
+	&__restart {
+		min-width: 200px;
+		font-size: 2.2rem;
+	}
 
-    &--visible{
-        display: flex;
-    }
+	&--visible {
+		display: flex;
+	}
 }
 
-.scores__container{
-    display: flex;
-    justify-content:space-around;
-    align-items: center;
-    width: 100vmin;
-    letter-spacing: .05em;
-    text-shadow: $text-shadow;
-    color: $font-color;
-    text-transform: uppercase;
-    margin-bottom: 15px;
+.scores__container {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	width: 100vmin;
+	letter-spacing: 0.05em;
+	text-shadow: $text-shadow;
+	color: $font-color;
+	text-transform: uppercase;
+	margin-bottom: 15px;
 
-    @include phone{
-        text-shadow: $text-shadow-mobile;
-    }
+	@include phone {
+		text-shadow: $text-shadow-mobile;
+	}
 }
 
 .score {
-   font-size: 3.1rem;
-   @include phone{
-       font-size: 2.2rem;
-   }
+	font-size: 3.1rem;
+	@include phone {
+		font-size: 2.2rem;
+	}
 }
 
-.speed, .coins{
-    font-size: 2.5rem;
-    @include phone{
-        font-size: 1rem;
-    }
-    &__number{
-        text-transform: initial;
-    }
+.speed,
+.coins {
+	font-size: 2.5rem;
+	@include phone {
+		font-size: 1rem;
+	}
+	&__number {
+		text-transform: initial;
+	}
 }
 
-.character, .coin{
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
+.character,
+.coin {
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
 }
 
 .character {
-    background-image: url('../images/character.jpg');
+	background-image: url('../images/character.jpg');
 }
 
 .coin {
-    background-image: url('../images/coin.gif');
+	background-image: url('../images/coin.gif');
 }
 
-.keyboard{
-    display: none;
-    flex-wrap: wrap;
-    width: 250px;
-    font-size: 2.5rem;
-    margin-top: 50px;
-    border-radius: 0;
-    &__up{
-        width: 100%;
-        margin: 0 calc(100%/3);
-    }
+.keyboard {
+	display: none;
+	flex-wrap: wrap;
+	width: 250px;
+	font-size: 2.5rem;
+	margin-top: 50px;
+	border-radius: 0;
+	&__up {
+		width: 100%;
+		margin: 0 calc(100% / 3);
+	}
 
-    &__down,&__left,&__right{
-        width: calc(100%/3);
-    }
+	&__down,
+	&__left,
+	&__right {
+		width: calc(100% / 3);
+	}
 
-    @include phone{
-        display: flex;
-        width: 220px;
-        font-size: 2.1rem;
-    }
+	@include phone {
+		display: flex;
+		width: 220px;
+		font-size: 2.1rem;
+	}
 
-    @include largerdevices{
-        display: flex;
-        width: 400px;
-    }
+	@include largerdevices {
+		display: flex;
+		width: 400px;
+	}
 }
 
-audio{
-    display: none;
+audio {
+	display: none;
 }

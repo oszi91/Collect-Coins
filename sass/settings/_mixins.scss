@@ -2,20 +2,20 @@ $phone-max-width: 767px;
 $largerdevices-max-width: 1200px;
 
 @mixin phone {
-  @media (max-width: $phone-max-width) {
-    @content;
-  }
+	@media (max-width: $phone-max-width) {
+		@content;
+	}
 }
 
 @mixin largerdevices {
-  @media (min-width: #{$phone-max-width + 1}) and (max-width: $largerdevices-max-width - 1) {
-    @content;
-  }
+	@media (min-width: #{$phone-max-width + 1}) and (max-width: $largerdevices-max-width - 1) {
+		@content;
+	}
 }
 
 @mixin flexBase {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  @content;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	@content;
 }
